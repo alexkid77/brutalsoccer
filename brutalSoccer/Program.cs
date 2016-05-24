@@ -13,6 +13,7 @@ namespace brutalSoccer
 
         static void Main(string[] args)
         {
+            cManager manager = new cManager();
             List<cLinea> lineas = new List<cLinea>();
             string[] files = System.IO.Directory.GetFiles(".", "*.csv");
             foreach (string file in files)
@@ -26,8 +27,15 @@ namespace brutalSoccer
 
                 }
                 List<string> gfdgfd = lineas.Select(p => p.visitante).Distinct().ToList();
+
+                foreach (cLinea l in lineas)
+                {
+                    manager.procesaLinea(l);
+                }
             }
           
+
+            
             lineas = lineas.OrderBy(p => p.fecha).ToList(); ;
 
         }
