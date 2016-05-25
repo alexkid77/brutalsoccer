@@ -26,12 +26,10 @@ namespace brutalSoccer
                     lineas.Add(new cLinea(csv));
 
                 }
+
                 List<string> gfdgfd = lineas.Select(p => p.visitante).Distinct().ToList();
 
-                foreach (cLinea l in lineas)
-                {
-                    manager.procesaLinea(l);
-                }
+                manager.procesaTemporada(lineas);
             }
           
 
