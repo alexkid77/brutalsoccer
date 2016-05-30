@@ -9,7 +9,7 @@ namespace brutalSoccer
     public class cManager
     {
 
-        List<cEquipo> equipos = new List<cEquipo>();
+        public List<cEquipo> equipos = new List<cEquipo>();
         public void procesaNombreEquipos(cLinea linea)
         {
             this.addEquipo(linea.local);
@@ -19,6 +19,7 @@ namespace brutalSoccer
 
         public void procesaTemporada(List<cLinea> lineas)
         {
+
             foreach (cLinea l in lineas)
             {
                 this.procesaNombreEquipos(l);
@@ -27,11 +28,14 @@ namespace brutalSoccer
             DateTime fechaMin = lineas.Min(p => p.fecha);
             DateTime fechaMax = lineas.Max(p => p.fecha);
 
-          
+
             foreach (cLinea l in lineas)
             {
+
                 cEquipo local = this.equipos.Where(p => p.Nombre == l.local).FirstOrDefault();
                 cEquipo visitante = this.equipos.Where(p => p.Nombre == l.visitante).FirstOrDefault();
+                local.addPartido(l, fechaMin, fechaMax);
+                visitante.addPartido(l, fechaMin, fechaMax);
 
             }
 
@@ -42,7 +46,7 @@ namespace brutalSoccer
         {
             if (!equipos.Exists(p => p.Nombre == nombre))
             {
-                cEquipo nuevoEquipo = new cEquipo();
+                cEquipo nuevoEquipo = new cEquipo(this);
                 nuevoEquipo.Nombre = nombre;
                 equipos.Add(nuevoEquipo);
             }
@@ -69,6 +73,7 @@ namespace brutalSoccer
             this.fechaInicio = fechaInicio;
             this.fechaFin = fechaFin;
             this.partidos = new List<cPartido>();
+            this.temporada = strTemporada;
         }
 
 
@@ -76,6 +81,11 @@ namespace brutalSoccer
 
     public class cEquipo
     {
+        cManager manager;
+        public cEquipo(cManager manager)
+        {
+            this.manager = manager;
+        }
         public string Nombre { get; set; }
         List<cTemporada> temporadas = new List<cTemporada>();
 
@@ -83,31 +93,74 @@ namespace brutalSoccer
         {
             bool valido = false;
             bool local = false;
-
+            string equipoCargar = "";
             if (linea.local == this.Nombre)
             {
                 valido = true;
                 local = true;
+                equipoCargar = linea.visitante;
             }
-
-            if (linea.visitante == this.Nombre)
+            else
             {
                 valido = true;
                 local = false;
+                equipoCargar = linea.local;
             }
 
-            if (valido == false)
-                return;
 
+
+
+        string strTemporada=    fechaIniTemporada.ToString("yy") + "/" + fechaFinTemporada.ToString("yy");
 
             List<cPartido> partidos = null;
-            cTemporada temporada = temporadas.Where(p => p.fechaInicio >= linea.fecha && p.fechaFin <= linea.fecha).FirstOrDefault();
+            List<cPartido> partidos_ajenos = null;
+            cEquipo equipo_ajeno = this.manager.equipos.Where(p => p.Nombre == equipoCargar).FirstOrDefault();
+
+            cTemporada temporada = temporadas.Where(p => p.temporada== strTemporada).FirstOrDefault();
+            cTemporada temporada_ajena = equipo_ajeno.temporadas.Where(p => p.temporada == strTemporada).FirstOrDefault();
+
+         
             if (temporada == null)
             {
                 temporada = new cTemporada(fechaIniTemporada, fechaFinTemporada);
+                this.temporadas.Add(temporada);
             }
-            partidos = temporada.partidos;
+            else
+            {
+                int jj = 0;
+                jj++;
+            }
 
+            if (temporada_ajena == null)
+            {
+                temporada_ajena = new cTemporada(fechaIniTemporada, fechaFinTemporada);
+                equipo_ajeno.temporadas.Add(temporada_ajena);
+            }
+
+            partidos = temporada.partidos;
+            partidos_ajenos = temporada_ajena.partidos;
+
+
+        
+            cPartido partido = new cPartido();
+            if (local == true)
+            {
+                partido.Local = this;
+                partido.Visitante = equipo_ajeno;
+            }
+            else
+            {
+                partido.Local = equipo_ajeno;
+                partido.Visitante = this;
+            }
+
+            if (partidos.Count > 1)
+            {
+                int x = 0;
+                x++;
+            }
+            partidos.Add(partido);
+            partidos_ajenos.Add(partido);
 
         }
     }

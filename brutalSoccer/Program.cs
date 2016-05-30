@@ -18,6 +18,7 @@ namespace brutalSoccer
             string[] files = System.IO.Directory.GetFiles(".", "*.csv");
             foreach (string file in files)
             {
+                lineas.Clear();
                 TextReader textReader = File.OpenText(file);
                 CsvReader csv = new CsvReader(textReader);
 
