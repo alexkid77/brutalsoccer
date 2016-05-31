@@ -36,7 +36,6 @@ namespace brutalSoccer
                 cEquipo visitante = this.equipos.Where(p => p.Nombre == l.visitante).FirstOrDefault();
                 local.addPartido(l, fechaMin, fechaMax);
                 visitante.addPartido(l, fechaMin, fechaMax);
-
             }
 
             //cTemporada temporada = new cTemporada(fechaMin, fechaMax);
@@ -110,16 +109,16 @@ namespace brutalSoccer
 
 
 
-        string strTemporada=    fechaIniTemporada.ToString("yy") + "/" + fechaFinTemporada.ToString("yy");
+            string strTemporada = fechaIniTemporada.ToString("yy") + "/" + fechaFinTemporada.ToString("yy");
 
             List<cPartido> partidos = null;
             List<cPartido> partidos_ajenos = null;
             cEquipo equipo_ajeno = this.manager.equipos.Where(p => p.Nombre == equipoCargar).FirstOrDefault();
 
-            cTemporada temporada = temporadas.Where(p => p.temporada== strTemporada).FirstOrDefault();
+            cTemporada temporada = temporadas.Where(p => p.temporada == strTemporada).FirstOrDefault();
             cTemporada temporada_ajena = equipo_ajeno.temporadas.Where(p => p.temporada == strTemporada).FirstOrDefault();
 
-         
+
             if (temporada == null)
             {
                 temporada = new cTemporada(fechaIniTemporada, fechaFinTemporada);
@@ -141,7 +140,7 @@ namespace brutalSoccer
             partidos_ajenos = temporada_ajena.partidos;
 
 
-        
+
             cPartido partido = new cPartido();
             if (local == true)
             {
@@ -159,18 +158,28 @@ namespace brutalSoccer
                 int x = 0;
                 x++;
             }
+
+            partido.Fecha = linea.fecha;
+           
+      
             partidos.Add(partido);
             partidos_ajenos.Add(partido);
-
+          
         }
     }
 
     public class cPartido
     {
+        public DateTime Fecha { get; set; }
         public string Division { get; set; }
         public cEquipo Local { get; set; }
         public cEquipo Visitante { get; set; }
-
+        public int GolesPrimerTiempoLocal { get; set; }
+        public int GolesPrimerTiempoVisitante { get; set; }
+        public int GolesTotalesLocal { get; set; } 
+        public int GolesTotalesVisitante { get; set; }
+        public string Resultado { get; set; }
+        public string ResultadoPrimerTiempo { get; set; }
     }
 
 
