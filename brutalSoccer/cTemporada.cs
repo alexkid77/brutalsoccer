@@ -160,7 +160,13 @@ namespace brutalSoccer
             }
 
             partido.Fecha = linea.fecha;
-           
+            partido.Division = linea.division;
+            partido.GolesPrimerTiempoLocal = linea.golesPrimerTiempoLocal;
+            partido.GolesPrimerTiempoVisitante = linea.golesPrimerTiempoVisitante;
+            partido.GolesTotalesLocal = linea.golesTotalesLocal;
+            partido.GolesTotalesVisitante = linea.golesTotalesVisitante;
+            partido.Resultado = linea.resultado;
+            partido.ResultadoPrimerTiempo = linea.resultadoPrimerTiempo;
       
             partidos.Add(partido);
             partidos_ajenos.Add(partido);
