@@ -86,7 +86,7 @@ namespace brutalSoccer
             this.manager = manager;
         }
         public string Nombre { get; set; }
-        List<cTemporada> temporadas = new List<cTemporada>();
+        public List<cTemporada> temporadas = new List<cTemporada>();
 
         public void addPartido(cLinea linea, DateTime fechaIniTemporada, DateTime fechaFinTemporada)
         {
@@ -167,10 +167,10 @@ namespace brutalSoccer
             partido.GolesTotalesVisitante = linea.golesTotalesVisitante;
             partido.Resultado = linea.resultado;
             partido.ResultadoPrimerTiempo = linea.resultadoPrimerTiempo;
-      
+
             partidos.Add(partido);
             partidos_ajenos.Add(partido);
-          
+
         }
     }
 
@@ -182,10 +182,46 @@ namespace brutalSoccer
         public cEquipo Visitante { get; set; }
         public int GolesPrimerTiempoLocal { get; set; }
         public int GolesPrimerTiempoVisitante { get; set; }
-        public int GolesTotalesLocal { get; set; } 
+        public int GolesTotalesLocal { get; set; }
         public int GolesTotalesVisitante { get; set; }
         public string Resultado { get; set; }
         public string ResultadoPrimerTiempo { get; set; }
+
+        public cEntradasNeuro entradasNeuro {
+            get {
+                return new cEntradasNeuro(this);
+            }
+        }
+    }
+
+    public class cEntradasNeuro
+    {
+        public double golesNormVisitante;
+        public double golesNormLocal;
+
+        public double golesNormVisitantePrimeraParte;
+        public double golesNormLocalSegundaParte;
+        public double division;
+        public cEntradasNeuro(cPartido partido)
+        {
+            if (partido.GolesTotalesVisitante != 0)
+                this.golesNormVisitante = partido.GolesTotalesVisitante / (partido.GolesTotalesVisitante + partido.GolesTotalesLocal);
+            else
+                this.golesNormVisitante = 0.5;
+
+
+            if (partido.GolesPrimerTiempoVisitante != 0)
+                this.golesNormVisitantePrimeraParte = partido.GolesPrimerTiempoVisitante / (partido.GolesPrimerTiempoVisitante + partido.GolesPrimerTiempoLocal);
+            else
+                this.golesNormLocalSegundaParte = 0.5;
+
+            if (partido.Division == "SP1")
+                this.division = 0.0f;
+            else
+                this.division = 1.0f;
+        }
+
+
     }
 
 

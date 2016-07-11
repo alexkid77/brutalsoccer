@@ -25,15 +25,14 @@ namespace brutalSoccer
                 while (csv.Read())
                 {
                     lineas.Add(new cLinea(csv));
-
                 }
 
                 List<string> gfdgfd = lineas.Select(p => p.visitante).Distinct().ToList();
 
                 manager.procesaTemporada(lineas);
             }
-          
 
+            cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
             
             lineas = lineas.OrderBy(p => p.fecha).ToList(); ;
 
