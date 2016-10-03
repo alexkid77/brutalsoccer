@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +11,28 @@ namespace brutalSoccer
   
     public class cPartido
     {
+        
+        [Key]
+        public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public string Division { get; set; }
-        public cEquipo Local { get; set; }
-        public cEquipo Visitante { get; set; }
+        public cEquipo Local;
+        public cEquipo Visitante;
         public int GolesPrimerTiempoLocal { get; set; }
         public int GolesPrimerTiempoVisitante { get; set; }
         public int GolesTotalesLocal { get; set; }
         public int GolesTotalesVisitante { get; set; }
         public string Resultado { get; set; }
         public string ResultadoPrimerTiempo { get; set; }
+        public virtual cTemporada temporada { get; set; }
+        public virtual cTemporada temporadaVisitante { get; set; }
+        public cPartido(cTemporada temporada,cTemporada temporadaVisitante)
+        {
+            this.temporada = temporada;
+            this.temporadaVisitante = temporadaVisitante;
+            this.Local = temporada.equipo;
+            this.Visitante = temporadaVisitante.equipo;
+        }
 
 
     }

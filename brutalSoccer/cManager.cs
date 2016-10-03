@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ namespace brutalSoccer
 {
     public class cManager
     {
-
-
-        public List<cEquipo> equipos { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public virtual ICollection<cEquipo> equipos { get; set; }
 
         public cManager()
         {
@@ -45,20 +46,32 @@ namespace brutalSoccer
                 visitante.addPartido(l, fechaMin, fechaMax);
             }
 
-     
+
         }
 
         private void addEquipo(string nombre)
         {
-            if (!equipos.Exists(p => p.Nombre == nombre))
+            if (!((List<cEquipo>)equipos).Exists(p => p.Nombre == nombre))
             {
+
                 cEquipo nuevoEquipo = new cEquipo(this);
                 nuevoEquipo.Nombre = nombre;
                 equipos.Add(nuevoEquipo);
+              
             }
         }
 
 
+        public void ProcesaJornadas()
+        {
+            foreach (cEquipo equipo in this.equipos)
+            {
+                foreach (cTemporada temporada in equipo.temporadas)
+                {
+                    temporada.procesaTemporada();
+                }
+            }
+        }
 
 
 

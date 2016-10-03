@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,16 +9,21 @@ namespace brutalSoccer
 {
     public class cEquipo
     {
+        [Key]
+        public string Nombre { get; set; }
+        public virtual ICollection<cTemporada> temporadas { get; set; }
         public cManager manager { get; set; }
+
         public cEquipo(cManager manager)
         {
             this.manager = manager;
+            this.temporadas= new List<cTemporada>();
         }
-        public string Nombre { get; set; }
-        public List<cTemporada> temporadas = new List<cTemporada>();
+     
 
         public void addPartido(cLinea linea, DateTime fechaIniTemporada, DateTime fechaFinTemporada)
         {
+         
             bool valido = false;
             bool local = false;
             string equipoCargar = "";
@@ -39,28 +45,27 @@ namespace brutalSoccer
 
             string strTemporada = fechaIniTemporada.ToString("yy") + "/" + fechaFinTemporada.ToString("yy");
 
-            List<cPartido> partidos = null;
-            List<cPartido> partidos_ajenos = null;
+            ICollection<cPartido> partidos = null;
+            ICollection<cPartido> partidos_ajenos = null;
             cEquipo equipo_ajeno = this.manager.equipos.Where(p => p.Nombre == equipoCargar).FirstOrDefault();
 
             cTemporada temporada = temporadas.Where(p => p.temporada == strTemporada).FirstOrDefault();
             cTemporada temporada_ajena = equipo_ajeno.temporadas.Where(p => p.temporada == strTemporada).FirstOrDefault();
 
-
+            cPartido partido=null;
             if (temporada == null)
             {
-                temporada = new cTemporada(fechaIniTemporada, fechaFinTemporada);
+                temporada = new cTemporada(this,fechaIniTemporada, fechaFinTemporada);
                 this.temporadas.Add(temporada);
+             
+             
             }
-            else
-            {
-                int jj = 0;
-                jj++;
-            }
+          
 
             if (temporada_ajena == null)
             {
-                temporada_ajena = new cTemporada(fechaIniTemporada, fechaFinTemporada);
+                temporada_ajena = new cTemporada(equipo_ajeno,fechaIniTemporada, fechaFinTemporada);
+                
                 equipo_ajeno.temporadas.Add(temporada_ajena);
             }
 
@@ -69,14 +74,17 @@ namespace brutalSoccer
 
 
 
-            cPartido partido = new cPartido();
+         
+
             if (local == true)
             {
+                partido = new cPartido(temporada, temporada_ajena);
                 partido.Local = this;
                 partido.Visitante = equipo_ajeno;
             }
             else
             {
+                partido = new cPartido(temporada_ajena, temporada);
                 partido.Local = equipo_ajeno;
                 partido.Visitante = this;
             }
@@ -97,6 +105,7 @@ namespace brutalSoccer
             partido.ResultadoPrimerTiempo = linea.resultadoPrimerTiempo;
 
             partidos.Add(partido);
+         
          //   partidos_ajenos.Add(partido);
 
         }

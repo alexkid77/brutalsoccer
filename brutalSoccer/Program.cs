@@ -14,8 +14,13 @@ namespace brutalSoccer
         static void Main(string[] args)
         {
             cManager manager = new cManager();
+            cModelo m = new cModelo();
+
+            m.Managers.Add(manager);
+           
             List<cLinea> lineas = new List<cLinea>();
             string[] files = System.IO.Directory.GetFiles(".", "*.csv");
+            int x = 0;
             foreach (string file in files)
             {
                 lineas.Clear();
@@ -30,12 +35,17 @@ namespace brutalSoccer
                 List<string> gfdgfd = lineas.Select(p => p.visitante).Distinct().ToList();
 
                 manager.procesaTemporada(lineas);
+
+                if(x==20)
+                    break;
+                x++;
             }
 
-         //   cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
-            
-            lineas = lineas.OrderBy(p => p.fecha).ToList(); ;
+            m.SaveChanges();
+            //   cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
 
+            lineas = lineas.OrderBy(p => p.fecha).ToList(); ;
+          
         }
     }
 }

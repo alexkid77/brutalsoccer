@@ -60,6 +60,7 @@
     <Compile Include="cJornada.cs" />
     <Compile Include="cLinea.cs" />
     <Compile Include="cManager.cs" />
+    <Compile Include="cModelo.cs" />
     <Compile Include="cPartido.cs" />
     <Compile Include="cTemporada.cs" />
     <Compile Include="Program.cs" />

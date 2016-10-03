@@ -18,6 +18,7 @@ namespace brutalSoccer
         public int numeroPartidosGanados { get; set; }
         public int numeroPartidosPerdidos { get; set; }
         public int numeroPartidosEmpadados { get; set; }
+        public cTemporada temporada { get; set; }
     }
 
 }
