@@ -56,7 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cEquipo.cs" />
+    <Compile Include="cJornada.cs" />
     <Compile Include="cLinea.cs" />
+    <Compile Include="cManager.cs" />
+    <Compile Include="cPartido.cs" />
     <Compile Include="cTemporada.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

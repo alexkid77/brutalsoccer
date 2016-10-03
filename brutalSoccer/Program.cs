@@ -32,7 +32,7 @@ namespace brutalSoccer
                 manager.procesaTemporada(lineas);
             }
 
-            cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
+         //   cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
             
             lineas = lineas.OrderBy(p => p.fecha).ToList(); ;
 
