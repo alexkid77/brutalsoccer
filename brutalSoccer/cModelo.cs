@@ -16,7 +16,7 @@ namespace brutalSoccer
         }
 
         public virtual DbSet<cEquipo> Equipos { get; set; }
-        public virtual DbSet<cJornada> Jornadas { get; set; }
+        public virtual DbSet<cResultadosJornada> Jornadas { get; set; }
         public virtual DbSet<cManager> Managers { get; set; }
         public virtual DbSet<cTemporada> Temporadas { get; set; }
         public virtual DbSet<cPartido> Partidos { get; set; }

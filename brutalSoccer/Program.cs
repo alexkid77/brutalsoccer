@@ -40,8 +40,8 @@ namespace brutalSoccer
                     break;
                 x++;
             }
-
-            m.SaveChanges();
+            manager.ProcesaJornadas();
+           // m.SaveChanges();
             //   cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
 
             lineas = lineas.OrderBy(p => p.fecha).ToList(); ;
