@@ -20,12 +20,15 @@ namespace brutalSoccer
         {
             get
             {
-                return this.golesAcumuladosLocal + this.golesAcumuladosVisitante;
+                return this.golesAcumuladosAfavorLocal + this.golesAcumuladosAfavorVisitante;
             }
 
         }
-        public int golesAcumuladosVisitante { get; set; }
-        public int golesAcumuladosLocal { get; set; }
+        public int golesAcumuladosAfavorVisitante { get; set; }
+        public int golesAcumuladosAfavorLocal { get; set; }
+
+        public int golesAcumuladosEnContraVisitante { get; set; }
+        public int golesAcumuladosEnContraLocal { get; set; }
 
         public int numeroPartidosGanados { get; set; }
         public int numeroPartidosPerdidos { get; set; }
@@ -36,6 +39,26 @@ namespace brutalSoccer
 
         public int numeroGolesEnContraLocal { get; set; }//goles que le han metido como local el equipo visitante
         public int numeroGolesEnContraVisitante { get; set; }//goles que le han metido como visitante el equipo local
+
+        public int ptosJornada { get; set; } //los ptos de la jornada actual
+        public int diferenciaGolesJornada { get; set; }//la diferencia de goles en la jornada actual
+
+        public int posicionJornadaActual { get; set; }
+        public int ptosStandar
+        {
+            get
+            {
+                return this.numeroPartidosGanados * 3 + this.numeroPartidosPerdidos * 0 + this.numeroPartidosEmpadados * 1;
+            }
+        }
+
+        public int diferenciaGoles
+        {
+            get {
+                return (this.golesAcumuladosAfavorLocal + this.golesAcumuladosAfavorVisitante) - (this.golesAcumuladosEnContraLocal + this.golesAcumuladosEnContraVisitante);
+            }
+        }
+
         public cTemporada temporada { get; set; }
     }
 

@@ -110,9 +110,10 @@ namespace brutalSoccer
                     {
                         listaJornada.Add(matriz[j, i]);
                     }
-                 List<cResultadosJornada> resultadoJornada=   listaJornada.OrderBy(p => ((p.numeroPartidosGanados - p.numeroPartidosPerdidos) + p.numeroGolesAfavorLocal + p.numeroGolesAfavorVisitante * 2 + p.numeroPartidosEmpadados)).ToList();
+                    List<cResultadosJornada> resultadoJornada = listaJornada.OrderBy(p => (p.numeroPartidosGanados*3 + p.numeroPartidosPerdidos*0 + p.numeroPartidosEmpadados*1)).ToList();
                     resultadoJornada.Reverse();
-                    resultadoGlobal = listaJornada.OrderBy(p => ((p.numeroPartidosGanados - p.numeroPartidosPerdidos) + p.numeroGolesAfavorLocal + p.numeroGolesAfavorVisitante * 2 + p.numeroPartidosEmpadados+p.golesAcumuladosLocal+p.golesAcumuladosVisitante)).ToList();
+
+                    resultadoGlobal = listaJornada.OrderBy(p => p.ptosStandar).ToList();
                     resultadoGlobal.Reverse();
                 }
             }

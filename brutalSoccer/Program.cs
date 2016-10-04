@@ -14,11 +14,11 @@ namespace brutalSoccer
         static void Main(string[] args)
         {
             cModelo m = new cModelo();
-         //  cTemporada e = m.Temporadas.FirstOrDefault();
-           //    cManager manager = m.Managers.FirstOrDefault();
-            generabbdd();
+        //   cTemporada e = m.Temporadas.FirstOrDefault();
+              cManager manager = m.Managers.FirstOrDefault();
+           // generabbdd();
             // 
-          //  manager.ProcesaClasificacion();
+            manager.ProcesaClasificacion();
             //    manager.ProcesaClasificacion();
             //   cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
 

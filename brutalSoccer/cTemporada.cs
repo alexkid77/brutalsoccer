@@ -22,7 +22,7 @@ namespace brutalSoccer
         public virtual cEquipo equipo { get; set; }
         public bool SinDatos { get; set; }
         public int equipoId { get; set; }
-        public cTemporada(cEquipo e,string division,DateTime fechaInicio, DateTime fechaFin)
+        public cTemporada(cEquipo e, string division, DateTime fechaInicio, DateTime fechaFin)
         {
             this.SinDatos = false;
             this.Division = division;
@@ -36,18 +36,18 @@ namespace brutalSoccer
         }
         public cTemporada()
         {
-          
+
         }
         public void procesaTemporada()
         {
             int npartidos = 0;
             cResultadosJornada acumulado = new cResultadosJornada();
-         
+
             foreach (cPartido p in this.partidos)
             {
                 cResultadosJornada resultado = new cResultadosJornada();
 
-                if (p.temporada== this)//es local
+                if (p.temporada == this)//es local
                 {
                     switch (p.Resultado)
                     {
@@ -55,7 +55,7 @@ namespace brutalSoccer
                             acumulado.numeroPartidosGanados++;
                             break;
                         case "D":
-                              acumulado.numeroPartidosEmpadados++;
+                            acumulado.numeroPartidosEmpadados++;
                             break;
                         case "A":
                             acumulado.numeroPartidosPerdidos++;
@@ -64,8 +64,10 @@ namespace brutalSoccer
 
                     resultado.numeroGolesEnContraLocal = p.GolesTotalesVisitante;
                     resultado.numeroGolesAfavorLocal = p.GolesTotalesLocal;
-                    acumulado.golesAcumuladosLocal += p.GolesTotalesLocal;
-                   
+                    acumulado.golesAcumuladosAfavorLocal += p.GolesTotalesLocal;
+                    acumulado.golesAcumuladosEnContraLocal += p.GolesTotalesVisitante;
+
+
                 }
                 else//es visitante
                 {
@@ -73,7 +75,7 @@ namespace brutalSoccer
                     {
                         case "H":
                             acumulado.numeroPartidosPerdidos++;
-                          
+
                             break;
                         case "D":
                             acumulado.numeroPartidosEmpadados++;
@@ -84,10 +86,10 @@ namespace brutalSoccer
                     }
                     resultado.numeroGolesEnContraVisitante = p.GolesTotalesLocal;
                     resultado.numeroGolesAfavorVisitante = p.GolesTotalesVisitante;
-                    acumulado.golesAcumuladosVisitante += p.GolesTotalesVisitante;
-                   
+                    acumulado.golesAcumuladosAfavorVisitante += p.GolesTotalesVisitante;
+                    acumulado.golesAcumuladosEnContraVisitante += p.GolesTotalesLocal;
                 }
-             
+
 
                 npartidos++;
                 resultado.numeroPartidosJugados = npartidos;
@@ -95,20 +97,24 @@ namespace brutalSoccer
                 resultado.numeroPartidosPerdidos = acumulado.numeroPartidosPerdidos;
                 resultado.numeroPartidosEmpadados = acumulado.numeroPartidosEmpadados;
 
-                resultado.golesAcumuladosLocal = acumulado.golesAcumuladosLocal;
-                resultado.golesAcumuladosVisitante = acumulado.golesAcumuladosVisitante;
+                resultado.golesAcumuladosAfavorLocal = acumulado.golesAcumuladosAfavorLocal;
+                resultado.golesAcumuladosAfavorVisitante = acumulado.golesAcumuladosAfavorVisitante;
 
-                resultado.temporada = this;
+                resultado.golesAcumuladosEnContraLocal = acumulado.golesAcumuladosEnContraLocal;
+                resultado.golesAcumuladosEnContraVisitante = acumulado.golesAcumuladosEnContraVisitante;
+              
+               
+                    resultado.temporada = this;
                 this.jornadas.Add(resultado);
             }
 
-           
+
         }
 
     }
 
 
-   
+
 
 
 
