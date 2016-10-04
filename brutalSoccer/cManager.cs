@@ -112,13 +112,18 @@ namespace brutalSoccer
                     }
                     List<cResultadosJornada> resultadoJornada = listaJornada.OrderBy(p => (p.numeroPartidosGanados*3 + p.numeroPartidosPerdidos*0 + p.numeroPartidosEmpadados*1)).ToList();
                     resultadoJornada.Reverse();
+                    for (int k = 0; k < resultadoJornada.Count; k++)
+                    {
+                        resultadoJornada[k].posicion = k+1;
+                    }
 
-                    resultadoGlobal = listaJornada.OrderBy(p => p.ptosStandar).ToList();
-                    resultadoGlobal.Reverse();
+                    resultadoGlobal = listaJornada.OrderBy(p => p.posicion).ToList();
+                   
                 }
+
             }
 
-
+            m.SaveChanges();
 
         }
 
