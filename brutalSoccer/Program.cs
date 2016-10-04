@@ -1,29 +1,60 @@
-﻿using CsvHelper;
+﻿using Accord.Controls;
+using Accord.MachineLearning.VectorMachines;
+using Accord.MachineLearning.VectorMachines.Learning;
+using Accord.Math;
+using Accord.Statistics.Kernels;
+using CsvHelper;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Runtime.InteropServices;
 namespace brutalSoccer
 {
+   
     class Program
     {
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
 
         static void Main(string[] args)
         {
+            AllocConsole();
+            EjecucionPostCreacion();
+            // Create a simple binary AND
+            // classification problem:
+
+            double[][] problem =
+            {
+    //             a    b    a + b
+    new double[] { 0,   0,     0    },
+    new double[] { 0,   1,     0    },
+    new double[] { 1,   0,     0    },
+    new double[] { 1,   1,     1    },
+};
+
+            // Get the two first columns as the problem
+            // inputs and the last column as the output
+
+            // input columns
+            double[][] inputs = problem.GetColumns(0, 1);
+
+            // output column
+            int[] outputs = problem.GetColumn(2).ToInt32();
+
+            // Plot the problem on screen
+            ScatterplotBox.Show("AND", inputs, outputs).Hold();
+
+        }
+
+        private static void EjecucionPostCreacion()
+        {
             cModelo m = new cModelo();
-        //   cTemporada e = m.Temporadas.FirstOrDefault();
-              cManager manager = m.Managers.FirstOrDefault();
-           // generabbdd();
-            // 
+            cManager manager = m.Managers.FirstOrDefault();
             manager.ProcesaClasificacion();
-            //    manager.ProcesaClasificacion();
-            //   cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
-
-            // lineas = lineas.OrderBy(p => p.fecha).ToList(); ;
-
         }
 
         private static void generabbdd()
@@ -55,7 +86,7 @@ namespace brutalSoccer
             }
             manager.ProcesaJornadas();
             m.SaveChanges();
-          
+
         }
     }
 }
