@@ -10,9 +10,13 @@ namespace brutalSoccer
     public class cEquipo
     {
         [Key]
+        public int Id { get; set; }
         public string Nombre { get; set; }
-        public virtual ICollection<cTemporada> temporadas { get; set; }
+        public virtual List<cTemporada> temporadas { get; set; }
         public cManager manager { get; set; }
+        public cEquipo()
+        {
+        }
 
         public cEquipo(cManager manager)
         {
@@ -52,19 +56,20 @@ namespace brutalSoccer
             cTemporada temporada = temporadas.Where(p => p.temporada == strTemporada).FirstOrDefault();
             cTemporada temporada_ajena = equipo_ajeno.temporadas.Where(p => p.temporada == strTemporada).FirstOrDefault();
 
+          
             cPartido partido=null;
             if (temporada == null)
             {
-                temporada = new cTemporada(this,fechaIniTemporada, fechaFinTemporada);
+                temporada = new cTemporada(this,linea.division,fechaIniTemporada, fechaFinTemporada);
                 this.temporadas.Add(temporada);
-             
-             
+               
+
             }
           
 
             if (temporada_ajena == null)
             {
-                temporada_ajena = new cTemporada(equipo_ajeno,fechaIniTemporada, fechaFinTemporada);
+                temporada_ajena = new cTemporada(equipo_ajeno,linea.division, fechaIniTemporada, fechaFinTemporada);
                 
                 equipo_ajeno.temporadas.Add(temporada_ajena);
             }

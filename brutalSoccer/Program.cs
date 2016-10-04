@@ -13,11 +13,26 @@ namespace brutalSoccer
 
         static void Main(string[] args)
         {
+            cModelo m = new cModelo();
+           cTemporada e = m.Temporadas.FirstOrDefault();
+            //   cManager manager = m.Managers.FirstOrDefault();
+           // generabbdd();
+            // 
+         //   manager.ProcesaClasificacion();
+            //    manager.ProcesaClasificacion();
+            //   cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
+
+            // lineas = lineas.OrderBy(p => p.fecha).ToList(); ;
+
+        }
+
+        private static void generabbdd()
+        {
             cManager manager = new cManager();
             cModelo m = new cModelo();
 
             m.Managers.Add(manager);
-           
+
             List<cLinea> lineas = new List<cLinea>();
             string[] files = System.IO.Directory.GetFiles(".", "*.csv");
             int x = 0;
@@ -36,15 +51,10 @@ namespace brutalSoccer
 
                 manager.procesaTemporada(lineas);
 
-                if(x==20)
-                    break;
-                x++;
+
             }
             manager.ProcesaJornadas();
-           // m.SaveChanges();
-            //   cEntradasNeuro neuro = manager.equipos[0].temporadas[0].partidos[0].entradasNeuro;
-
-            lineas = lineas.OrderBy(p => p.fecha).ToList(); ;
+            m.SaveChanges();
           
         }
     }

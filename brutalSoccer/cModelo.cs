@@ -29,6 +29,7 @@ namespace brutalSoccer
         {
             base.OnModelCreating(modelBuilder);//constructor of identity framework
 
+            modelBuilder.Entity<cTemporada>().HasRequired<cEquipo>(s => s.equipo).WithMany(p => p.temporadas).HasForeignKey(c=>c.equipoId);
         //    modelBuilder.Entity<cPartido>().HasMany<>(s => s.partidos);
                       
 

@@ -11,6 +11,7 @@ namespace brutalSoccer
     {
         [Key]
         public int Id { get; set; }
+        public int numeroTemporadas { get; set; }
         public virtual ICollection<cEquipo> equipos { get; set; }
 
         public cManager()
@@ -57,13 +58,14 @@ namespace brutalSoccer
                 cEquipo nuevoEquipo = new cEquipo(this);
                 nuevoEquipo.Nombre = nombre;
                 equipos.Add(nuevoEquipo);
-              
+
             }
         }
 
 
         public void ProcesaJornadas()
         {
+            /*Procesamos las estadisticas de cada joranda por cada equipo*/
             foreach (cEquipo equipo in this.equipos)
             {
                 foreach (cTemporada temporada in equipo.temporadas)
@@ -71,7 +73,30 @@ namespace brutalSoccer
                     temporada.procesaTemporada();
                 }
             }
+            
+
         }
+
+        public void ProcesaClasificacion()
+        {
+            cModelo m = new cModelo();
+         var xx=   m.Temporadas.Include("equipo").GroupBy(p => new { p.Division, p.temporada });
+            this.numeroTemporadas = this.equipos.Max(p => p.temporadas.Count);
+            cEquipo equipoMax = this.equipos.Where(p => p.temporadas.Count == this.numeroTemporadas).FirstOrDefault();
+
+            for (int i = 0; i < this.numeroTemporadas; i++)
+            {
+                List<List<cResultadosJornada>> matrixlista = new List<List<cResultadosJornada>>();
+                foreach (cEquipo equipo in this.equipos)
+                {
+                    List<cTemporada> listaTemporada =(List<cTemporada>) equipo.temporadas;
+                    matrixlista.Add((List<cResultadosJornada>)listaTemporada[i].jornadas);
+
+                }
+            }
+
+        }
+
 
 
 

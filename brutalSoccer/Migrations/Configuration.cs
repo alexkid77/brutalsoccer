@@ -5,14 +5,16 @@ namespace brutalSoccer.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<brutalSoccer.brutalContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<brutalSoccer.cModelo>
     {
         public Configuration()
         {
+            
             AutomaticMigrationsEnabled = true;
+            ContextKey = "brutalSoccer.cModelo";
         }
 
-        protected override void Seed(brutalSoccer.brutalContext context)
+        protected override void Seed(brutalSoccer.cModelo context)
         {
             //  This method will be called after migrating to the latest version.
 

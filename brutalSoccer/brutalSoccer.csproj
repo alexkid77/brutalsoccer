@@ -63,6 +63,11 @@
     <Compile Include="cModelo.cs" />
     <Compile Include="cPartido.cs" />
     <Compile Include="cTemporada.cs" />
+    <Compile Include="Migrations\201610040808236_InitialCreate.cs" />
+    <Compile Include="Migrations\201610040808236_InitialCreate.Designer.cs">
+      <DependentUpon>201610040808236_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +110,11 @@
     <None Include="SP2.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610040808236_InitialCreate.resx">
+      <DependentUpon>201610040808236_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

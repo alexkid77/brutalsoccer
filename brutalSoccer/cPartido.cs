@@ -26,6 +26,9 @@ namespace brutalSoccer
         public string ResultadoPrimerTiempo { get; set; }
         public virtual cTemporada temporada { get; set; }
         public virtual cTemporada temporadaVisitante { get; set; }
+        public cPartido()
+        {
+        }
         public cPartido(cTemporada temporada,cTemporada temporadaVisitante)
         {
             this.temporada = temporada;

@@ -14,14 +14,18 @@ namespace brutalSoccer
         [Key]
         public int Id { get; set; }
         public string temporada { get; set; }
+        public string Division { get; set; }
         public DateTime fechaInicio { get; set; }
         public DateTime fechaFin { get; set; }
         public virtual ICollection<cPartido> partidos { get; set; }
         public virtual ICollection<cResultadosJornada> jornadas { get; set; }
-        public cEquipo equipo { get; set; }
-
-        public cTemporada(cEquipo e,DateTime fechaInicio, DateTime fechaFin)
+        public virtual cEquipo equipo { get; set; }
+        public bool SinDatos { get; set; }
+        public int equipoId { get; set; }
+        public cTemporada(cEquipo e,string division,DateTime fechaInicio, DateTime fechaFin)
         {
+            this.SinDatos = false;
+            this.Division = division;
             this.equipo = e;
             string strTemporada = fechaInicio.ToString("yy") + "/" + fechaFin.ToString("yy");
             this.fechaInicio = fechaInicio;
@@ -30,7 +34,10 @@ namespace brutalSoccer
             this.jornadas = new List<cResultadosJornada>();
             this.temporada = strTemporada;
         }
-
+        public cTemporada()
+        {
+          
+        }
         public void procesaTemporada()
         {
             int npartidos = 0;
