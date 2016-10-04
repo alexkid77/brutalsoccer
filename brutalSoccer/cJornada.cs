@@ -31,8 +31,11 @@ namespace brutalSoccer
         public int numeroPartidosPerdidos { get; set; }
         public int numeroPartidosEmpadados { get; set; }
 
-        public int numeroGolesLocal { get; set; }
-        public int numeroGolesVisitante { get; set; }
+        public int numeroGolesAfavorLocal { get; set; }
+        public int numeroGolesAfavorVisitante { get; set; }
+
+        public int numeroGolesEnContraLocal { get; set; }//goles que le han metido como local el equipo visitante
+        public int numeroGolesEnContraVisitante { get; set; }//goles que le han metido como visitante el equipo local
         public cTemporada temporada { get; set; }
     }
 

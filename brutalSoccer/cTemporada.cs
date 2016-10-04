@@ -17,8 +17,8 @@ namespace brutalSoccer
         public string Division { get; set; }
         public DateTime fechaInicio { get; set; }
         public DateTime fechaFin { get; set; }
-        public virtual ICollection<cPartido> partidos { get; set; }
-        public virtual ICollection<cResultadosJornada> jornadas { get; set; }
+        public virtual List<cPartido> partidos { get; set; }
+        public virtual List<cResultadosJornada> jornadas { get; set; }
         public virtual cEquipo equipo { get; set; }
         public bool SinDatos { get; set; }
         public int equipoId { get; set; }
@@ -61,9 +61,9 @@ namespace brutalSoccer
                             acumulado.numeroPartidosPerdidos++;
                             break;
                     }
-                    
 
-                    resultado.numeroGolesLocal = p.GolesTotalesLocal;
+                    resultado.numeroGolesEnContraLocal = p.GolesTotalesVisitante;
+                    resultado.numeroGolesAfavorLocal = p.GolesTotalesLocal;
                     acumulado.golesAcumuladosLocal += p.GolesTotalesLocal;
                    
                 }
@@ -82,8 +82,8 @@ namespace brutalSoccer
                             acumulado.numeroPartidosGanados++;
                             break;
                     }
-
-                    resultado.numeroGolesVisitante = p.GolesTotalesVisitante;
+                    resultado.numeroGolesEnContraVisitante = p.GolesTotalesLocal;
+                    resultado.numeroGolesAfavorVisitante = p.GolesTotalesVisitante;
                     acumulado.golesAcumuladosVisitante += p.GolesTotalesVisitante;
                    
                 }

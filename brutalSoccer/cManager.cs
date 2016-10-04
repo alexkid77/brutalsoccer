@@ -73,27 +73,51 @@ namespace brutalSoccer
                     temporada.procesaTemporada();
                 }
             }
-            
+
 
         }
 
         public void ProcesaClasificacion()
         {
             cModelo m = new cModelo();
-         var xx=   m.Temporadas.Include("equipo").GroupBy(p => new { p.Division, p.temporada });
-            this.numeroTemporadas = this.equipos.Max(p => p.temporadas.Count);
-            cEquipo equipoMax = this.equipos.Where(p => p.temporadas.Count == this.numeroTemporadas).FirstOrDefault();
-
-            for (int i = 0; i < this.numeroTemporadas; i++)
+            var listaAgrupacion = m.Temporadas.Include("equipo").GroupBy(p => new { p.Division, p.temporada });
+            foreach (var agrupacion in listaAgrupacion)
             {
-                List<List<cResultadosJornada>> matrixlista = new List<List<cResultadosJornada>>();
-                foreach (cEquipo equipo in this.equipos)
-                {
-                    List<cTemporada> listaTemporada =(List<cTemporada>) equipo.temporadas;
-                    matrixlista.Add((List<cResultadosJornada>)listaTemporada[i].jornadas);
 
+                /*CREACION DE LA MATRIZ*/
+                //todas las jornadas del equipo a una lista
+                List<List<cResultadosJornada>> temporadas = new List<List<cResultadosJornada>>();
+                foreach (var value in agrupacion)
+                {
+                    temporadas.Add((List<cResultadosJornada>)(value.jornadas));
+                }
+
+
+                cResultadosJornada[,] matriz = new cResultadosJornada[temporadas.Count, temporadas[0].Count];
+
+                for (int i = 0; i < temporadas.Count; i++)
+                    for (int j = 0; j < temporadas[i].Count; j++)
+                    {
+                        matriz[i, j] = temporadas[i][j];
+                    }
+
+                /*FIn de creacion de la matriz*/
+                List<cResultadosJornada> resultadoGlobal = null;
+                for (int i = 0; i < matriz.GetLength(1); i++)
+                {
+                    List<cResultadosJornada> listaJornada = new List<cResultadosJornada>();
+                    for (int j = 0; j < matriz.GetLength(0); j++)
+                    {
+                        listaJornada.Add(matriz[j, i]);
+                    }
+                 List<cResultadosJornada> resultadoJornada=   listaJornada.OrderBy(p => ((p.numeroPartidosGanados - p.numeroPartidosPerdidos) + p.numeroGolesAfavorLocal + p.numeroGolesAfavorVisitante * 2 + p.numeroPartidosEmpadados)).ToList();
+                    resultadoJornada.Reverse();
+                    resultadoGlobal = listaJornada.OrderBy(p => ((p.numeroPartidosGanados - p.numeroPartidosPerdidos) + p.numeroGolesAfavorLocal + p.numeroGolesAfavorVisitante * 2 + p.numeroPartidosEmpadados+p.golesAcumuladosLocal+p.golesAcumuladosVisitante)).ToList();
+                    resultadoGlobal.Reverse();
                 }
             }
+
+
 
         }
 
