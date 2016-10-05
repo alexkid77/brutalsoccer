@@ -47,9 +47,11 @@ namespace brutalSoccer
             foreach (cPartido p in this.partidos)
             {
                 cResultadosJornada resultado = new cResultadosJornada();
-
+            
                 if (p.temporada == this)//es local
                 {
+                    resultado.IdEquipo = p.Local.Id;
+                    resultado.IdEquipoAdversario = p.Visitante.Id;
                     switch (p.Resultado)
                     {
                         case "H":
@@ -75,6 +77,8 @@ namespace brutalSoccer
                 }
                 else//es visitante
                 {
+                    resultado.IdEquipo = p.Visitante.Id ;
+                    resultado.IdEquipoAdversario = p.Local.Id;
                     switch (p.Resultado)
                     {
                         case "H":

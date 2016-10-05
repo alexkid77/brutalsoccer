@@ -10,7 +10,41 @@ namespace brutalSoccer
 {
    public class cGeneraDataSet
     {
-      public  DataTable ObtenTablaEquipo(int idEquipo)
+
+        public DataTable ObtenTablaEquipo(int[] idEquipos)
+        {
+            List<cResultadosJornada> res=new List<cResultadosJornada>();
+            cModelo m = new cModelo();
+            for (int i = 0; i < idEquipos.Length; i++)
+            {
+                var idEquipo = idEquipos[i];
+                List<cResultadosJornada> res2 = m.Jornadas.Where(p => p.temporada.equipo.Id == idEquipo).ToList();
+                res.AddRange(res2);
+            }
+            DataTable data = new DataTable("tabla");
+            Type tipo = typeof(cResultadosJornada);
+            var properties = tipo.GetProperties().ToList();
+            properties.Remove(properties.Where(p => p.Name == "Id").FirstOrDefault());
+            properties.Remove(properties.Where(p => p.Name == "temporada").FirstOrDefault());
+            foreach (PropertyInfo info in properties)
+            {
+                data.Columns.Add(new DataColumn(info.Name, Nullable.GetUnderlyingType(info.PropertyType) ?? info.PropertyType));
+            }
+
+            foreach (cResultadosJornada entity in res)
+            {
+                object[] values = new object[properties.Count];
+                for (int i = 0; i < properties.Count; i++)
+                {
+                    values[i] = properties[i].GetValue(entity);
+                }
+
+                data.Rows.Add(values);
+            }
+
+            return data;
+        }
+        public  DataTable ObtenTablaEquipo(int idEquipo)
         {
             cModelo m = new cModelo();
            

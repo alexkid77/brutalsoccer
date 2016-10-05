@@ -11,12 +11,15 @@ namespace brutalSoccer
     {
         [Key]
         public int Id { get; set; }
-
+      //  public virtual cTemporada Adversario{get;set;}//temporada del adversario
         public int temporadaId { get; set; }
+
+        public int IdEquipo { get; set; }
+        public int IdEquipoAdversario { get; set; }
 
         public string ResultadoPartido { get; set; }
         public int posicion { get; set; }
-
+        public int posicionAdversario { get; set; }
         public int numeroPartidosJugados { get; set; }
 
         public int puntosAcumulados
