@@ -29,10 +29,10 @@ namespace brutalSoccer
         static void Main(string[] args)
         {
             AllocConsole();
-           // generabbdd();
-            //EjecucionPostCreacion();
+          //  generabbdd();
+           // EjecucionPostCreacion();
             cGeneraDataSet gDataSet = new cGeneraDataSet();
-            gDataSet.ObtenTablaEquipo(1);
+       DataTable t=     gDataSet.ObtenTablaEquipo(1);
           
 
      /*     

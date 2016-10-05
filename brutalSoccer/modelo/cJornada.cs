@@ -43,25 +43,16 @@ namespace brutalSoccer
         public int numeroGolesEnContraLocal { get; set; }//goles que le han metido como local el equipo visitante
         public int numeroGolesEnContraVisitante { get; set; }//goles que le han metido como visitante el equipo local
 
-        public int ptosJornada { get; set; } //los ptos de la jornada actual
-        public int diferenciaGolesJornada { get; set; }//la diferencia de goles en la jornada actual
+        //public int ptosJornada { get; set; } //los ptos de la jornada actual
+       // public int diferenciaGolesJornada { get; set; }//la diferencia de goles en la jornada actual
 
-        public int posicionJornadaActual { get; set; }
+     //   public int posicionJornadaActual { get; set; }
 
-        public int ptosStandar
-        {
-            get
-            {
-                return this.numeroPartidosGanados * 3 + this.numeroPartidosPerdidos * 0 + this.numeroPartidosEmpadados * 1;
-            }
-        }
+        public int ptosStandar { get; set; }
+      
 
-        public int diferenciaGoles
-        {
-            get {
-                return (this.golesAcumuladosAfavorLocal + this.golesAcumuladosAfavorVisitante) - (this.golesAcumuladosEnContraLocal + this.golesAcumuladosEnContraVisitante);
-            }
-        }
+        public int diferenciaGoles { get; set; }
+       
 
         public virtual cTemporada temporada { get; set; }
     }

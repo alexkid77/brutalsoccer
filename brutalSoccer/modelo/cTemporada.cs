@@ -70,7 +70,7 @@ namespace brutalSoccer
                     resultado.numeroGolesAfavorLocal = p.GolesTotalesLocal;
                     acumulado.golesAcumuladosAfavorLocal += p.GolesTotalesLocal;
                     acumulado.golesAcumuladosEnContraLocal += p.GolesTotalesVisitante;
-
+                 
 
                 }
                 else//es visitante
@@ -108,9 +108,10 @@ namespace brutalSoccer
 
                 resultado.golesAcumuladosEnContraLocal = acumulado.golesAcumuladosEnContraLocal;
                 resultado.golesAcumuladosEnContraVisitante = acumulado.golesAcumuladosEnContraVisitante;
-              
-               
-                    resultado.temporada = this;
+
+                resultado.ptosStandar= acumulado.numeroPartidosGanados * 3 + acumulado.numeroPartidosPerdidos * 0 + acumulado.numeroPartidosEmpadados * 1;
+               resultado.diferenciaGoles= (acumulado.golesAcumuladosAfavorLocal + acumulado.golesAcumuladosAfavorVisitante) - (acumulado.golesAcumuladosEnContraLocal + acumulado.golesAcumuladosEnContraVisitante);
+                resultado.temporada = this;
                 this.jornadas.Add(resultado);
             }
 
