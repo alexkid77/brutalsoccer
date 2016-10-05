@@ -11,6 +11,9 @@ namespace brutalSoccer
     {
         [Key]
         public int Id { get; set; }
+
+        public int temporadaId { get; set; }
+
         public string ResultadoPartido { get; set; }
         public int posicion { get; set; }
 
@@ -44,6 +47,7 @@ namespace brutalSoccer
         public int diferenciaGolesJornada { get; set; }//la diferencia de goles en la jornada actual
 
         public int posicionJornadaActual { get; set; }
+
         public int ptosStandar
         {
             get
@@ -59,7 +63,7 @@ namespace brutalSoccer
             }
         }
 
-        public cTemporada temporada { get; set; }
+        public virtual cTemporada temporada { get; set; }
     }
 
 }

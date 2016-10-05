@@ -29,11 +29,13 @@ namespace brutalSoccer
         static void Main(string[] args)
         {
             AllocConsole();
-
-            generabbdd();
-            EjecucionPostCreacion();
-
+           // generabbdd();
+            //EjecucionPostCreacion();
+            cGeneraDataSet gDataSet = new cGeneraDataSet();
+            gDataSet.ObtenTablaEquipo(1);
           
+
+     /*     
             // Let's say we have the following data to be classified
             // into three possible classes. Those are the samples:
             // 
@@ -115,7 +117,7 @@ namespace brutalSoccer
 
             // Compute classification error
             double error = new ZeroOneLoss(outputs).Loss(predicted);
-            double loss = new CategoryCrossEntropyLoss(outputs).Loss(prob);
+            double loss = new CategoryCrossEntropyLoss(outputs).Loss(prob);*/
         }
 
         private static void EjecucionPostCreacion()

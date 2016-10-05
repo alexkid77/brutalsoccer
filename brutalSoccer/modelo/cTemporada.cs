@@ -22,6 +22,7 @@ namespace brutalSoccer
         public virtual cEquipo equipo { get; set; }
         public bool SinDatos { get; set; }
         public int equipoId { get; set; }
+
         public cTemporada(cEquipo e, string division, DateTime fechaInicio, DateTime fechaFin)
         {
             this.SinDatos = false;

@@ -90,13 +90,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cEquipo.cs" />
-    <Compile Include="cJornada.cs" />
+    <Compile Include="modelo\cEquipo.cs" />
+    <Compile Include="cGeneraDataSet.cs" />
+    <Compile Include="modelo\cJornada.cs" />
     <Compile Include="cLinea.cs" />
-    <Compile Include="cManager.cs" />
-    <Compile Include="cModelo.cs" />
-    <Compile Include="cPartido.cs" />
-    <Compile Include="cTemporada.cs" />
+    <Compile Include="modelo\cManager.cs" />
+    <Compile Include="modelo\cModelo.cs" />
+    <Compile Include="modelo\cPartido.cs" />
+    <Compile Include="modelo\cTemporada.cs" />
     <Compile Include="Migrations\201610040808236_InitialCreate.cs" />
     <Compile Include="Migrations\201610040808236_InitialCreate.Designer.cs">
       <DependentUpon>201610040808236_InitialCreate.cs</DependentUpon>
