@@ -11,7 +11,7 @@ namespace brutalSoccer
     {
         [Key]
         public int Id { get; set; }
-
+        public string ResultadoPartido { get; set; }
         public int posicion { get; set; }
 
         public int numeroPartidosJugados { get; set; }

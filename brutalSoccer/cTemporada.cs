@@ -53,15 +53,18 @@ namespace brutalSoccer
                     {
                         case "H":
                             acumulado.numeroPartidosGanados++;
+                            resultado.ResultadoPartido = "G";
                             break;
                         case "D":
                             acumulado.numeroPartidosEmpadados++;
+                            resultado.ResultadoPartido = "E";
                             break;
                         case "A":
                             acumulado.numeroPartidosPerdidos++;
+                            resultado.ResultadoPartido = "P";
                             break;
                     }
-
+                  
                     resultado.numeroGolesEnContraLocal = p.GolesTotalesVisitante;
                     resultado.numeroGolesAfavorLocal = p.GolesTotalesLocal;
                     acumulado.golesAcumuladosAfavorLocal += p.GolesTotalesLocal;
@@ -75,13 +78,15 @@ namespace brutalSoccer
                     {
                         case "H":
                             acumulado.numeroPartidosPerdidos++;
-
+                            resultado.ResultadoPartido = "P";
                             break;
                         case "D":
                             acumulado.numeroPartidosEmpadados++;
+                            resultado.ResultadoPartido = "E";
                             break;
                         case "A":
                             acumulado.numeroPartidosGanados++;
+                            resultado.ResultadoPartido = "G";
                             break;
                     }
                     resultado.numeroGolesEnContraVisitante = p.GolesTotalesLocal;

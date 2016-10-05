@@ -29,6 +29,11 @@ namespace brutalSoccer
         static void Main(string[] args)
         {
             AllocConsole();
+
+            generabbdd();
+            EjecucionPostCreacion();
+
+          
             // Let's say we have the following data to be classified
             // into three possible classes. Those are the samples:
             // 
@@ -149,6 +154,7 @@ namespace brutalSoccer
             }
             manager.ProcesaJornadas();
             m.SaveChanges();
+
 
         }
     }
